@@ -70,7 +70,7 @@ class TestingController extends AbstractController
         return $this->render('testing/process.html.twig', [
             'form' => $form,
             'currentQuestionText' => $currentQuestion->getText(),
-            'questionNum' => 1,
+            'questionNum' => $this->questionStorage->getCurrentPosition(),
         ]);
     }
 

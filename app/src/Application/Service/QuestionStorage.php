@@ -10,8 +10,13 @@ use App\Domain\Storage\QuestionStorageInterface;
 
 class QuestionStorage
 {
-    public function __construct(private readonly QuestionStorageInterface $questionStorage, private readonly QuestionRepositoryInterface $quesionRepository)
+    public function __construct(private readonly QuestionStorageInterface $questionStorage, private readonly QuestionRepositoryInterface $questionRepository)
     {
+    }
+
+    public function getCurrentPosition(): int
+    {
+        return $this->questionStorage->getCurrentPosition();
     }
 
     public function getCurrent(): ?Question
@@ -25,7 +30,7 @@ class QuestionStorage
             return;
         }
 
-        $questions = $this->quesionRepository->getQuestions();
+        $questions = $this->questionRepository->getQuestions();
 
         shuffle($questions);
 
@@ -34,10 +39,6 @@ class QuestionStorage
 
     public function shift(): void
     {
-        $questions = $this->questionStorage->get();
-
-        array_shift($questions);
-
-        $this->questionStorage->set($questions);
+        $this->questionStorage->removeFirst();
     }
 }

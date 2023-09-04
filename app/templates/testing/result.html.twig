@@ -6,11 +6,11 @@
     {% for result in results %}
         <div class="row">
             <div class="col-md-6">
-                <div class="panel panel-default ">
+                <div class="panel panel-default mt-3">
                     <div class="panel-heading">Вопрос #{{ loop.index }}:</div>
                     <div class="panel-body">
                         <p>{{ result.getQuestion }}</p>
-                        <p>Вы ответили:</p>
+                        <p>Ваш ответ:</p>
                         <ul>
                             {% for answer in result.memberResponseAnswers %}
                                 <li>{{ answer.answer }}</li>

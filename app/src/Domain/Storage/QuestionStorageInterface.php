@@ -16,4 +16,8 @@ interface QuestionStorageInterface
     public function getCurrentQuestion(): ?Question;
 
     public function set(array $questions): void;
+
+    public function getCurrentPosition(): int;
+
+    public function removeFirst(): void;
 }
