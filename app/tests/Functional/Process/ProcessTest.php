@@ -63,20 +63,16 @@ class ProcessTest extends TestBaseProcess
     private function process(): void
     {
         $crawler = $this->client->getCrawler();
-        $form = $crawler->filter('form[name="process_form"]');
+        $formCrawler = $crawler->filter('form[name="process_form"]');
 
-        if ($form->count()) {
-            $form = $form->form();
-        } else {
+        if (!$formCrawler->count()) {
             return;
         }
+
+        $form = $formCrawler->form();
 
         $processForm = $form->get('process_form');
         $questionId = $processForm['questionId']->getValue();
-
-        if (!$questionId) {
-            return;
-        }
 
         $answers = $processForm['answers'];
 
@@ -107,5 +103,7 @@ class ProcessTest extends TestBaseProcess
         $this->client->request(Request::METHOD_GET, '/');
 
         $this->client->followRedirect();
+
+        $this->assertResponseIsSuccessful();
     }
 }

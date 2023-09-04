@@ -26,7 +26,7 @@ class QuestionStorage
 
     public function generate(): void
     {
-        if (!empty($this->questionStorage->get())) {
+        if (!empty($this->questionStorage->getAll())) {
             return;
         }
 

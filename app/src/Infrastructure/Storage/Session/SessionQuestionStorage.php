@@ -21,14 +21,14 @@ final class SessionQuestionStorage implements QuestionStorageInterface
         $this->session = $this->requestStack->getSession();
     }
 
-    public function get(): array
+    public function getAll(): array
     {
         return $this->session->get(self::QUESTIONS_SESSION_KEY, []);
     }
 
     public function getCurrentQuestion(): ?Question
     {
-        if (empty($questions = $this->get())) {
+        if (empty($questions = $this->getAll())) {
             return null;
         }
 
@@ -47,7 +47,7 @@ final class SessionQuestionStorage implements QuestionStorageInterface
 
     public function removeFirst(): void
     {
-        $questions = $this->get();
+        $questions = $this->getAll();
 
         array_shift($questions);
 

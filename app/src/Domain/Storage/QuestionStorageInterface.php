@@ -11,7 +11,7 @@ interface QuestionStorageInterface
     /**
      * @return Question[]
      */
-    public function get(): array;
+    public function getAll(): array;
 
     public function getCurrentQuestion(): ?Question;
 
