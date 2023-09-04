@@ -1,15 +1,18 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Infrastructure\Storage\Session;
 
 use App\Domain\Entity\Question;
 use App\Domain\Storage\QuestionStorageInterface;
+use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-final class QuestionStorage implements QuestionStorageInterface
+final class SessionQuestionStorage implements QuestionStorageInterface
 {
     private const QUESTIONS_SESSION_KEY = 'questions_session_key';
-
 
     private readonly SessionInterface $session;
 
@@ -25,17 +28,17 @@ final class QuestionStorage implements QuestionStorageInterface
 
     public function getCurrentQuestion(): ?Question
     {
-        if(empty($questions = $this->get())){
+        if (empty($questions = $this->get())) {
             return null;
         }
 
         $question = current($questions);
 
-        if($question instanceof Question || null === $question){
-            return  $question;
+        if ($question instanceof Question || null === $question) {
+            return $question;
         }
 
-        throw new \InvalidArgumentException();
+        throw new InvalidArgumentException();
     }
 
     public function set(array $questions): void

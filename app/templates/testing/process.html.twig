@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+    <h2>Вопрос #{{ questionNum }}</h2>
+    <h3>{{ currentQuestionText }}</h3>
+    {{ form(form) }}
+{% endblock %}

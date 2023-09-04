@@ -14,7 +14,7 @@ class Answer
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\ManyToOne(inversedBy: 'answers')]
     #[ORM\JoinColumn(nullable: false)]
@@ -32,7 +32,7 @@ class Answer
         $this->correct = $isCorrect;
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -49,7 +49,7 @@ class Answer
         return $this;
     }
 
-    public function getText(): ?string
+    public function getText(): string
     {
         return $this->text;
     }

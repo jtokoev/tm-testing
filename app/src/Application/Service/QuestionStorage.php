@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Service;
 
 use App\Domain\Entity\Question;
@@ -29,7 +31,6 @@ class QuestionStorage
 
         $this->questionStorage->set($questions);
     }
-
 
     public function shift(): void
     {
