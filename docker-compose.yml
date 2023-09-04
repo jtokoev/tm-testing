@@ -1,6 +1,6 @@
 version: '3.8'
-services:
 
+services:
   nginx:
     container_name: "tm_test_nginx"
     build: ./docker_images/nginx
@@ -14,4 +14,22 @@ services:
     build: ./docker_images/php
     volumes:
       - ./app:/var/www/html
+    environment:
+      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      PHP_FPM_CLEAR_ENV: "no"
+    depends_on:
+      - pgsql
 
+  pgsql:
+    container_name: "tm_test_pgsql"
+    image: postgres:latest
+    volumes:
+      - pg_db:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+
+volumes:
+  pg_db:
+    driver: local

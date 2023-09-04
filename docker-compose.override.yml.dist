@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  nginx:
+    ports:
+      - "88:80"
+  pgsql:
+    ports:
+      - "5432:5432"
+
+  adminer:
+    container_name: "tm_test_adminer"
+    image: adminer:latest
+    restart: always
+    environment:
+      ADMINER_DEFAULT_SERVER: pgsql
+    ports:
+      - "8093:8080"
+    depends_on:
+      - pgsql
