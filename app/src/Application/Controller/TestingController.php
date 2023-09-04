@@ -8,6 +8,9 @@ use App\Application\Dto\AnswerDto;
 use App\Application\Form\ProcessForm;
 use App\Application\Service\AnswerStorage;
 use App\Application\Service\QuestionStorage;
+use App\Application\Service\ResultReader;
+use App\Application\Service\ResultSaver;
+use App\Domain\Entity\Member;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,11 +32,19 @@ class TestingController extends AbstractController
     }
 
     #[Route('process', 'process')]
-    public function process(Request $request): Response
+    public function process(Request $request, ResultSaver $resultSaver): Response
     {
         $currentQuestion = $this->questionStorage->getCurrent();
 
         if (null === $currentQuestion) {
+            if ($result = $this->answerStorage->getResult()) {
+                $member = $resultSaver->save($result);
+
+                $this->answerStorage->clear();
+
+                return $this->redirectToRoute('testing_result', ['id' => $member->getId()]);
+            }
+
             return $this->redirectToRoute('testing_main');
         }
 
@@ -47,7 +58,7 @@ class TestingController extends AbstractController
             /** @var AnswerDto $answerDto */
             $answerDto = $form->getData();
 
-            $answerDto->question = $currentQuestion->getId();
+            $answerDto->questionId = $currentQuestion->getId();
 
             $this->answerStorage->addAnswer($answerDto);
 
@@ -61,5 +72,13 @@ class TestingController extends AbstractController
             'currentQuestionText' => $currentQuestion->getText(),
             'questionNum' => 1,
         ]);
+    }
+
+    #[Route(path: 'result/{id}', name: 'result')]
+    public function result(ResultReader $resultReader, Member $member): Response
+    {
+        $results = $resultReader->findByMember($member->getId());
+
+        return $this->render('testing/result.html.twig', ['results' => $results]);
     }
 }

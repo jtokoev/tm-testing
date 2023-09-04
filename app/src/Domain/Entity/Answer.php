@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
-use App\Infrastructure\Repository\AnswerRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: AnswerRepository::class)]
+#[ORM\Entity]
 class Answer
 {
     #[ORM\Id]
@@ -57,5 +56,10 @@ class Answer
     public function isCorrect(): bool
     {
         return $this->correct;
+    }
+
+    public function __toString(): string
+    {
+        return $this->text;
     }
 }

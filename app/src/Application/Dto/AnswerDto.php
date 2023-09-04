@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 final class AnswerDto
 {
     #[Assert\Type('integer')]
-    public int $question;
+    public int $questionId;
 
     #[Assert\Type('array')]
     public array $answers;

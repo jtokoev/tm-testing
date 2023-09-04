@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
-use App\Infrastructure\Repository\QuestionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: QuestionRepository::class)]
+#[ORM\Entity]
 class Question
 {
     #[ORM\Id]
@@ -54,5 +53,10 @@ class Question
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->text;
     }
 }

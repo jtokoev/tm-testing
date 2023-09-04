@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace App\Infrastructure\Repository;
 
 use App\Domain\Entity\Question;
-use App\Domain\Repository\QuesionRepositoryInterface;
+use App\Domain\Repository\QuestionRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @extends ServiceEntityRepository<Question>
@@ -17,7 +18,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Question[]    findAll()
  * @method Question[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class QuestionRepository extends ServiceEntityRepository implements QuesionRepositoryInterface
+class QuestionRepository extends ServiceEntityRepository implements QuestionRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -31,5 +32,10 @@ class QuestionRepository extends ServiceEntityRepository implements QuesionRepos
             ->leftJoin('q.answers', 'a')
             ->getQuery()
             ->getResult();
+    }
+
+    public function findById(int $id): Question
+    {
+        return $this->find($id) ?? throw new NotFoundHttpException(sprintf('Resource by id="%d" not found', $id));
     }
 }

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+    <h2>Результаты</h2>
+    <a href="{{ path('testing_main') }}" class="btn btn-primary">Пройти тест с начала </a>
+    {% for result in results %}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default ">
+                    <div class="panel-heading">Вопрос #{{ loop.index }}:</div>
+                    <div class="panel-body">
+                        <p>{{ result.getQuestion }}</p>
+                        <p>Вы ответили:</p>
+                        <ul>
+                            {% for answer in result.memberResponseAnswers %}
+                                <li>{{ answer.answer }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="panel-footer">
+                        {% if result.correct %}
+                            <div class="alert alert-success">Вы ответили верно</div>
+                        {% else %}
+                            <div class="alert alert-danger">Вы ответили неверно</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

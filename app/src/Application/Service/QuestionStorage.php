@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Application\Service;
 
 use App\Domain\Entity\Question;
-use App\Domain\Repository\QuesionRepositoryInterface;
+use App\Domain\Repository\QuestionRepositoryInterface;
 use App\Domain\Storage\QuestionStorageInterface;
 
 class QuestionStorage
 {
-    public function __construct(private readonly QuestionStorageInterface $questionStorage, private readonly QuesionRepositoryInterface $quesionRepository)
+    public function __construct(private readonly QuestionStorageInterface $questionStorage, private readonly QuestionRepositoryInterface $quesionRepository)
     {
     }
 

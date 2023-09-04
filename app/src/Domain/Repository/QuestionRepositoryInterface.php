@@ -6,10 +6,12 @@ namespace App\Domain\Repository;
 
 use App\Domain\Entity\Question;
 
-interface QuesionRepositoryInterface
+interface QuestionRepositoryInterface
 {
     /**
      * @return Question[]
      */
     public function getQuestions(): array;
+
+    public function findById(int $id): Question;
 }
