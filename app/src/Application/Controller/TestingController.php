@@ -57,7 +57,6 @@ class TestingController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var AnswerDto $answerDto */
             $answerDto = $form->getData();
-
             $answerDto->questionId = $currentQuestion->getId();
 
             $this->answerStorage->addAnswer($answerDto);
@@ -69,7 +68,7 @@ class TestingController extends AbstractController
 
         return $this->render('testing/process.html.twig', [
             'form' => $form,
-            'currentQuestionText' => $currentQuestion->getText(),
+            'currentQuestion' => $currentQuestion->getText(),
             'questionNum' => $this->questionStorage->getCurrentPosition(),
         ]);
     }

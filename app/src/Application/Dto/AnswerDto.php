@@ -12,5 +12,6 @@ final class AnswerDto
     public int $questionId;
 
     #[Assert\Type('array')]
+    #[Assert\NotBlank]
     public array $answers;
 }

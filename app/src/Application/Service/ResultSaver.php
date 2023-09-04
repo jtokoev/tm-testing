@@ -37,7 +37,7 @@ class ResultSaver
 
             $memberResponse = (new MemberResponseFactory())->create();
 
-            $isCorrect = \count($answerDto->answers) > 0;
+            $isCorrect = true;
 
             foreach ($answerDto->answers as $answerId) {
                 $answer = $this->answerRepository->findById($answerId);
