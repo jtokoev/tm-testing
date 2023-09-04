@@ -2,7 +2,7 @@ FROM php:8.1-fpm
 
 
 RUN apt-get update && apt-get install -y \
-    libpq-dev git libzip-dev p7zip-full \
+    libpq-dev git unzip libzip-dev  \
     && docker-php-ext-install pdo pdo_pgsql \
     && docker-php-ext-install zip
 
