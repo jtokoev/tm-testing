@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+
+  nginx:
+    container_name: "tm_test_nginx"
+    build: ./docker_images/nginx
+    volumes:
+      - ./app:/var/www/html
+    depends_on:
+      - php
+
+  php:
+    container_name: "tm_test_php"
+    build: ./docker_images/php
+    volumes:
+      - ./app:/var/www/html
+
