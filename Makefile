@@ -25,4 +25,4 @@ analyze:
 	docker exec ${PHP_CONTAINER} vendor/bin/psalm --no-cache
 
 
-check: analyze test
+check: db analyze test
