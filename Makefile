@@ -7,6 +7,9 @@ build:
 	docker-compose up -d
 	docker exec ${PHP_CONTAINER} composer install
 
+rebuild:
+	docker-compose up -d --build
+
 db:
 	docker exec ${PHP_CONTAINER} bin/console doctrine:database:drop --force
 	docker exec ${PHP_CONTAINER} bin/console doctrine:database:create
