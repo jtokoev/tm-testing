@@ -46,7 +46,8 @@ class ProcessTest extends TestBaseProcess
 
                 if (!$answer->isCorrect()) {
                     $isCorrect = false;
-                    continue;
+
+                    break;
                 }
             }
 
