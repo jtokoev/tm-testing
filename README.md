@@ -1,18 +1,21 @@
 ## Шаги для запуска
+!`Примечание: Пункты с 1 по 3 обязательны для выполнения, они необходимы для настройки проекта и его запуска.`
 
-1) Клонируем проект
+1) Клонируем проект 
    - git clone git@github.com:jtokoev/tm-testing.git && cd tm-testing
 2) Собираем проект
     - прежде убедитесь, что порты `88(nginx), 5432(pqsql), 8093(adminer)` свободны, если нет, то необходимо отредактировать порты в [docker-compose.override.yml.dist](docker-compose.override.yml.dist)
     - при желании можете удалить конфинурацию контейнера `adminer` тут [docker-compose.override.yml.dist](docker-compose.override.yml.dist)
     - команда: `make build`.
 
-3) Настройка базы
+3) Настройка базы данных, миграции, фикстуры
    - команда: `make db`.
 4) Тесты
    - команда: `make test` или `make check`.
  
 5) http://localhost:88 (укажите свой порт если вы поменяли)
+
+
 
 ## Коротко о выполненной задаче 
 
